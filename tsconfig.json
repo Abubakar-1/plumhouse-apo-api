@@ -1,0 +1,25 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    /* Base Options */
+    "target": "ES2020" /* Modern JavaScript version compatibility */,
+    "module": "commonjs" /* Module system for Node.js */,
+    "lib": ["ES2020"] /* Standard libraries to include */,
+    "outDir": "./dist" /* Output directory for compiled JavaScript */,
+    "rootDir": "./src" /* Root directory of our source files */,
+
+    /* Strictness */
+    "strict": true /* Enable all strict type-checking options */,
+    "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type */,
+    "esModuleInterop": true /* Enables compatibility with CommonJS modules */,
+
+    /* Advanced Options */
+    "skipLibCheck": true /* Skip type checking of declaration files */,
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file */,
+    "moduleResolution": "node" /* How modules get resolved (classic vs. node) */,
+    "resolveJsonModule": true /* Allow importing .json files */,
+    "sourceMap": true /* Generate source maps for easier debugging */
+  },
+  "include": ["src/**/*"] /* Which files to include in compilation */,
+  "exclude": ["node_modules", "**/*.spec.ts"] /* Which files to exclude */
+}

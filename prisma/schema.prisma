@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String // This will store the hashed password
+  createdAt DateTime @default(now())
+}
+
+model Room {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String    @db.Text
+  price       Float    
+  size        Int        @default(0)
+  capacity    Int        @default(0)
+
+  images      RoomImage[]
+
+  freeWifi        Boolean  @default(false)
+  shower          Boolean  @default(false)
+  airportTransport Boolean @default(false)
+  balcony         Boolean  @default(false)
+  refrigerator    Boolean  @default(false)
+  support24_7     Boolean  @default(true) // Note: Identifiers cannot start with numbers.
+  workDesk        Boolean  @default(false)
+  fitnessCenter   Boolean  @default(false)
+  swimmingPool    Boolean  @default(false)
+
+  features        Json     @default("[]")
+
+  bookings    Booking[]
+}
+
+model RoomImage {
+  id          Int     @id @default(autoincrement())
+  url         String  
+  publicId    String  
+  isPrimary   Boolean @default(false) // Flag to identify the main display image
+
+  room        Room    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId      Int
+
+  @@index([roomId]) // Add an index on roomId for faster queries
+}
+
+model Booking {
+  id         Int      @id @default(autoincrement())
+  bookingId  String   @unique @default(cuid())
+
+  room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId     Int
+
+  guestName  String
+  guestEmail String
+  guestPhone String
+
+  checkIn    DateTime
+  checkOut   DateTime
+
+  adults     Int      @default(1)
+  children   Int      @default(0)
+
+  createdAt  DateTime @default(now())
+}
