@@ -28,7 +28,7 @@ export const createRoom = async (roomData: any): Promise<Room> => {
     // 2. If image data was provided, create the related RoomImage records.
     if (images && images.length > 0) {
       await tx.roomImage.createMany({
-        data: images.map((image) => ({
+        data: images.map((image: any) => ({
           ...image,
           roomId: newRoom.id,
         })),

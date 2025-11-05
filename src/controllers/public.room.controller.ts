@@ -18,7 +18,7 @@ export const handleGetPublicRooms = async (
   try {
     const rooms = await roomService.getPublicRooms();
     successResponse(res, rooms, "Rooms retrieved successfully");
-  } catch (error) {
+  } catch (error: any) {
     errorResponse(
       res,
       "Failed to retrieve public room listings.",
@@ -50,7 +50,7 @@ export const handleGetPublicRoomById = async (
     }
 
     successResponse(res, room, "Room details retrieved successfully");
-  } catch (error) {
+  } catch (error: any) {
     errorResponse(res, "Failed to retrieve room details.", 500, error);
   }
 };
@@ -85,7 +85,7 @@ export const handleGetRoomAvailability = async (
       availability,
       "Room availability retrieved successfully"
     );
-  } catch (error) {
+  } catch (error: any) {
     errorResponse(res, "Failed to retrieve room availability.", 500, error);
   }
 };
