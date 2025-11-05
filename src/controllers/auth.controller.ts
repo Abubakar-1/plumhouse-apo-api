@@ -23,7 +23,7 @@ export const handleAdminLogin = async (
 
     const tokenPayload = await authService.loginAdmin({ email, password });
     successResponse(res, tokenPayload, "Admin login successful.");
-  } catch (error) {
+  } catch (error: any) {
     // The service layer throws an error for invalid credentials.
     // We catch it and respond with a 401 Unauthorized, as originally intended.
     // The message is kept generic to prevent leaking information about which field was incorrect.

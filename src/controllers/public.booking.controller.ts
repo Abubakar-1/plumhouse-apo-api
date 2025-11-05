@@ -45,7 +45,7 @@ export const handleCreateGuestBooking = async (
       "Booking confirmed successfully.",
       201
     );
-  } catch (error) {
+  } catch (error: any) {
     // Specifically handle the concurrency/conflict error from the service layer.
     if (error instanceof Error && error.message.startsWith("Conflict:")) {
       return errorResponse(res, error.message, 409, error); // 409 Conflict
@@ -78,7 +78,7 @@ export const handleGetBookingByPublicId = async (
     }
 
     successResponse(res, booking, "Booking details retrieved successfully.");
-  } catch (error) {
+  } catch (error: any) {
     errorResponse(res, "Failed to retrieve booking.", 500, error);
   }
 };

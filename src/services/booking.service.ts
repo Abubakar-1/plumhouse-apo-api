@@ -71,7 +71,7 @@ export const getBookingByPublicId = async (bookingId: string) => {
         select: {
           name: true,
           price: true,
-          imageUrl: true,
+          images: true,
         },
       },
     },

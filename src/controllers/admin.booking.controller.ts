@@ -18,7 +18,7 @@ export const handleGetAllBookings = async (
   try {
     const bookings = await bookingService.getAllBookingsByAdmin();
     successResponse(res, bookings, "All bookings retrieved successfully.");
-  } catch (error) {
+  } catch (error: any) {
     errorResponse(res, "Failed to retrieve bookings.", 500, error);
   }
 };
@@ -41,7 +41,7 @@ export const handleGetBookingById = async (
       return notFoundResponse(res, "Booking not found.");
     }
     successResponse(res, booking, "Booking retrieved successfully.");
-  } catch (error) {
+  } catch (error: any) {
     errorResponse(res, "Failed to retrieve booking.", 500, error);
   }
 };
