@@ -14,6 +14,8 @@ import publicBookingRoutes from "./routes/public.booking.routes";
 
 import uploadAdminRoutes from "./routes/upload.routes";
 
+import webhookRoutes from "./routes/webhook.routes";
+
 dotenv.config();
 
 const app: Express = express();
@@ -36,6 +38,9 @@ app.use("/api/admin/rooms", roomAdminRoutes);
 app.use("/api/admin/bookings", adminBookingRoutes);
 
 app.use("/api/admin/uploads", uploadAdminRoutes);
+
+// WEBHOOK ROUTES
+app.use("/api/webhooks", webhookRoutes);
 
 // --- Health Check Endpoint ---
 app.get("/api/health", (req: Request, res: Response) => {

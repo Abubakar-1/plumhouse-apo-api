@@ -9,8 +9,15 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  CANCELLED
+  FAILED
 }
 
 model Admin {
@@ -60,6 +67,9 @@ model RoomImage {
 model Booking {
   id         Int      @id @default(autoincrement())
   bookingId  String   @unique @default(cuid())
+
+  status           PaymentStatus @default(PENDING)
+  paymentReference String?       @unique // To store the Paystack transaction reference
 
   room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId     Int

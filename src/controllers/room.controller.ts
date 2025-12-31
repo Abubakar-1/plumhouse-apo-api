@@ -33,6 +33,7 @@ export const handleCreateRoom = async (
     const newRoom = await roomService.createRoom(validationResult.data);
     successResponse(res, newRoom, "Room created successfully", 201);
   } catch (error: any) {
+    console.log(error);
     // This will now only catch true server/database errors, not validation errors.
     errorResponse(res, "Failed to create room.", 500, error);
   }
@@ -47,6 +48,7 @@ export const handleGetAllRooms = async (
     const allRooms = await roomService.getAllRooms();
     successResponse(res, allRooms, "Rooms retrieved successfully");
   } catch (error: any) {
+    console.log(error);
     console.log(error);
     errorResponse(res, "Failed to retrieve rooms.", 500, error);
   }
@@ -66,6 +68,7 @@ export const handleGetRoomById = async (
     }
     successResponse(res, room, "Room retrieved successfully");
   } catch (error: any) {
+    console.log(error);
     console.log(error);
     errorResponse(res, "Failed to retrieve room.", 500, error);
   }

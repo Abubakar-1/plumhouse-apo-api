@@ -7,6 +7,7 @@ export const handleGetUploadSignature = (req: Request, res: Response) => {
     const signatureData = getCloudinarySignature();
     successResponse(res, signatureData, "Signature generated successfully.");
   } catch (error: any) {
+    console.log(error);
     errorResponse(res, "Failed to generate upload signature.", 500, error);
   }
 };

@@ -6,5 +6,10 @@ const router = Router();
 
 router.post("/", publicBookingController.handleCreateGuestBooking);
 router.get("/:bookingId", publicBookingController.handleGetBookingByPublicId);
+// Route for initializing payment
+router.post(
+  "/initialize-payment",
+  publicBookingController.handleInitializePayment
+);
 
 export default router;

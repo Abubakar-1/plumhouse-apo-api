@@ -19,6 +19,7 @@ export const handleGetAllBookings = async (
     const bookings = await bookingService.getAllBookingsByAdmin();
     successResponse(res, bookings, "All bookings retrieved successfully.");
   } catch (error: any) {
+    console.log(error);
     errorResponse(res, "Failed to retrieve bookings.", 500, error);
   }
 };
@@ -42,6 +43,7 @@ export const handleGetBookingById = async (
     }
     successResponse(res, booking, "Booking retrieved successfully.");
   } catch (error: any) {
+    console.log(error);
     errorResponse(res, "Failed to retrieve booking.", 500, error);
   }
 };

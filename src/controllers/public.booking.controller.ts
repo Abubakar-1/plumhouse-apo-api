@@ -46,6 +46,7 @@ export const handleCreateGuestBooking = async (
       201
     );
   } catch (error: any) {
+    console.log(error);
     // Specifically handle the concurrency/conflict error from the service layer.
     if (error instanceof Error && error.message.startsWith("Conflict:")) {
       return errorResponse(res, error.message, 409, error); // 409 Conflict
@@ -56,10 +57,25 @@ export const handleCreateGuestBooking = async (
   }
 };
 
+export const handleInitializePayment = async (req: Request, res: Response) => {
+  try {
+    const paymentData = await bookingService.initializePayment(req.body);
+    successResponse(res, paymentData, "Payment initialized successfully.", 201);
+  } catch (error: any) {
+    console.log(error);
+    console.log(error);
+    if (error instanceof Error && error.message.startsWith("Conflict:")) {
+      return errorResponse(res, error.message, 409);
+    }
+    errorResponse(res, "Failed to initialize payment.", 500, error);
+  }
+};
+
 /**
  * Handles GET /api/bookings/:bookingId
  * Retrieves a specific booking's details using its public-facing secure ID.
  */
+
 export const handleGetBookingByPublicId = async (
   req: Request,
   res: Response
@@ -79,6 +95,7 @@ export const handleGetBookingByPublicId = async (
 
     successResponse(res, booking, "Booking details retrieved successfully.");
   } catch (error: any) {
+    console.log(error);
     errorResponse(res, "Failed to retrieve booking.", 500, error);
   }
 };
